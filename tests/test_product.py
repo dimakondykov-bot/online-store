@@ -5,7 +5,7 @@ def test_product(simple_product):
 
     assert simple_product.name == "test_product"
     assert simple_product.description == "test_product"
-    assert simple_product.price == 500
+    assert simple_product.get_price == 500
     assert simple_product.quantity == 3
 
 

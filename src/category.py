@@ -1,19 +1,51 @@
 
 
-class Category():
-    # атрибуты класса общие для всех объектов
+class Category:
     total_categories = 0
     total_products = 0
 
-    name: str
-    description: str
-    products: list
-
-    def __init__(self,name,description,products=None):
+    def __init__(self, name: str, description: str, products=None):
         self.name = name
         self.description = description
-        self.products = products if products else []
+        self.__products = products if products else []
 
         Category.total_categories += 1
-        Category.total_products += len(self.products)
+        Category.total_products += len(self.__products)
 
+    def add_product(self, product):
+        """Добавляет товар в категорию с проверкой дубликатов"""
+        for existing_product in self.__products:
+            if existing_product.name.lower() == product.name.lower():
+
+                existing_product.quantity += product.quantity
+
+                if product.get_price > existing_product.get_price:
+                    existing_product.get_price = product.get_price
+
+                existing_product.description = product.description
+                print(f"Товар '{product.name}' уже существует. Количество увеличено до {existing_product.quantity}")
+                return
+
+        self.__products.append(product)
+        Category.total_products += 1
+        print(f"Товар '{product.name}' успешно добавлен")
+
+    @property
+    def products(self):
+        """Property для отображения списка товаров"""
+        result = []
+        for product in self.__products:
+            result.append(f'{product.name}, {product.get_price} руб. Остаток: {product.quantity} шт.')
+        return "\n".join(result)
+
+    def get_products_list(self):
+        """Возвращает исходный список объектов товаров"""
+        return self.__products
+
+    @property
+    def products_count(self):
+        """Возвращает количество товаров в категории"""
+        return len(self.__products)
+
+    def __str__(self):
+        return f"{self.name}, количество продуктов: {len(self.__products)}"
