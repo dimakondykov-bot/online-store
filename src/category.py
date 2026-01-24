@@ -1,5 +1,3 @@
-
-
 class Category:
     total_categories = 0
     total_products = 0
@@ -12,6 +10,12 @@ class Category:
         Category.total_categories += 1
         Category.total_products += len(self.__products)
 
+    def __str__(self):
+        sum_quantity = 0
+        for product in self.__products:
+            sum_quantity += product.price
+        return f'Название категории: {self.name}, количество продуктов: {sum_quantity} шт.'
+
     def add_product(self, product):
         """Добавляет товар в категорию с проверкой дубликатов"""
         for existing_product in self.__products:
@@ -19,8 +23,8 @@ class Category:
 
                 existing_product.quantity += product.quantity
 
-                if product.get_price > existing_product.get_price:
-                    existing_product.get_price = product.get_price
+                if product.price > existing_product.price:
+                    existing_product.price = product.price
 
                 existing_product.description = product.description
                 print(f"Товар '{product.name}' уже существует. Количество увеличено до {existing_product.quantity}")
@@ -30,12 +34,18 @@ class Category:
         Category.total_products += 1
         print(f"Товар '{product.name}' успешно добавлен")
 
+    def get_product(self, index: int):
+        """Возвращает продукт по индексу, если индекс корректен"""
+        if 0 <= index < len(self.__products):
+            return self.__products[index]
+        return None
+
     @property
     def products(self):
         """Property для отображения списка товаров"""
         result = []
         for product in self.__products:
-            result.append(f'{product.name}, {product.get_price} руб. Остаток: {product.quantity} шт.')
+            result.append(f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт.')
         return "\n".join(result)
 
     def get_products_list(self):
