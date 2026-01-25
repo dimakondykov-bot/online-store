@@ -11,10 +11,7 @@ class Category:
         Category.total_products += len(self.__products)
 
     def __str__(self):
-        sum_quantity = 0
-        for product in self.__products:
-            sum_quantity += product.price
-        return f'Название категории: {self.name}, количество продуктов: {sum_quantity} шт.'
+        return f'Название категории: {self.name}, количество продуктов: {self.products_count} шт.'
 
     def add_product(self, product):
         """Добавляет товар в категорию с проверкой дубликатов"""
