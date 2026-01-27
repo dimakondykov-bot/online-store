@@ -11,7 +11,7 @@ class Product:
     def __add__(self, other):
         if not isinstance(other, Product):
             raise TypeError
-        return (self.__price * self.quantity) + (other.__price * self.quantity)
+        return (self.__price * self.quantity) + (other.__price * other.quantity)
 
     @classmethod
     def new_product(cls, product_dict: dict, existing_products=None):
