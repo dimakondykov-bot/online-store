@@ -1,3 +1,6 @@
+from src.product import Product
+
+
 class Category:
     total_categories = 0
     total_products = 0
@@ -15,6 +18,9 @@ class Category:
 
     def add_product(self, product):
         """Добавляет товар в категорию с проверкой дубликатов"""
+        if not issubclass(type(product), Product):
+            raise TypeError("Можно добавлять только объекты типа Product или его наследников")
+
         for existing_product in self.__products:
             if existing_product.name.lower() == product.name.lower():
 

@@ -1,6 +1,8 @@
 from src.categoryIterator import CategoryIterator
 from src.category import Category
+from src.lawnGrass import LawnGrass
 from src.product import Product
+from src.smartphone import Smartphone
 
 
 def main():
@@ -19,3 +21,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
