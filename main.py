@@ -1,9 +1,4 @@
-from src.categoryIterator import CategoryIterator
-from src.category import Category
-from src.lawnGrass import LawnGrass
-from src.product import Product
-from src.smartphone import Smartphone
-
+from category import Category
 
 def main():
     product1 = Product('Product 1', 'Test product', 100.0, 1)
@@ -15,9 +10,8 @@ def main():
     category.add_product(product2)
     category.add_product(product3)
 
-    for item in CategoryIterator(category):
+    for item in category:
         print(item)
-
 
 if __name__ == '__main__':
     main()

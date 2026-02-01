@@ -27,23 +27,23 @@ def test_lawngrass_init():
 def test_lawngrass_add_same_type():
     """Проверяем корректность сложения двух объектов LawnGrass."""
     grass1 = LawnGrass(
-        name = "Трава 1",
-        description = "Test 1",
-        price = 1300,
-        quantity = 3,
-        country = "США",
-        germination_period = 7,
-        color = "зёленая",
+        name="Трава 1",
+        description="Test 1",
+        price=1300,
+        quantity=3,
+        country="США",
+        germination_period=7,
+        color="зёленая",
     )
 
     grass2 = LawnGrass(
-        name = "Трава 2",
-        description = "Test 2",
-        price = 900,
-        quantity = 2,
-        country = "Канада",
-        germination_period = 5,
-        color = "тёмно зелёная",
+        name="Трава 2",
+        description="Test 2",
+        price=900,
+        quantity=2,
+        country="Канада",
+        germination_period=5,
+        color="тёмно зелёная",
     )
 
     result = grass1 + grass2

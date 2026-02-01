@@ -23,4 +23,4 @@ class Smartphone(Product):
         """Функция складывает товары одного класса"""
         if type(self) != type(other):
             raise TypeError
-        return (self.__price * self.quantity) + (other.__price * other.quantity)
+        return (self.price * self.quantity) + (other.price * other.quantity)

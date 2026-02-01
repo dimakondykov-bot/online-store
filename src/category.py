@@ -1,3 +1,5 @@
+from typing import Any
+
 from src.product import Product
 
 
@@ -16,7 +18,7 @@ class Category:
     def __str__(self):
         return f'Название категории: {self.name}, количество продуктов: {self.products_count} шт.'
 
-    def add_product(self, product):
+    def add_product(self, product: Product) -> None:
         """Добавляет товар в категорию с проверкой дубликатов"""
         if not issubclass(type(product), Product):
             raise TypeError("Можно добавлять только объекты типа Product или его наследников")
@@ -37,28 +39,29 @@ class Category:
         Category.total_products += 1
         print(f"Товар '{product.name}' успешно добавлен")
 
-    def get_product(self, index: int):
+    def __iter__(self):
+        from src.categoryIterator import CategoryIterator
+        return CategoryIterator(self)
+
+    def get_product(self, index: int) -> Product | None:
         """Возвращает продукт по индексу, если индекс корректен"""
         if 0 <= index < len(self.__products):
             return self.__products[index]
         return None
 
     @property
-    def products(self):
+    def products(self) -> str:
         """Property для отображения списка товаров"""
         result = []
         for product in self.__products:
             result.append(f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт.')
         return "\n".join(result)
 
-    def get_products_list(self):
+    def get_products_list(self) -> list[Product]:
         """Возвращает исходный список объектов товаров"""
         return self.__products
 
     @property
-    def products_count(self):
+    def products_count(self) -> int:
         """Возвращает количество товаров в категории"""
         return len(self.__products)
-
-    def __str__(self):
-        return f"{self.name}, количество продуктов: {len(self.__products)}"
