@@ -1,15 +1,36 @@
-[tool.poetry]
-name = "online store"
-version = "0.1.0"
-description = ""
-authors = ["Dmitriy <dimakondykov@mail.ru>"]
-readme = "README.md"
-package-mode = false
-
-[tool.poetry.dependencies]
-python = "^3.14"
-
-
+# Создадим правильный pyproject.toml
+@'
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "online-store"
+version = "0.1.0"
+description = "Online Store System"
+authors = [
+    {name = "HONOR", email = "your@email.com"}
+]
+dependencies = [
+    "django>=5.0",
+]
+requires-python = ">=3.8"
+readme = "README.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black>=23.0",
+    "flake8>=6.0",
+]
+
+[tool.poetry]
+package-mode = false
+
+# Указываем где находятся пакеты
+[tool.poetry.packages]
+[{include = "src"}]
+
+[project.scripts]
+start = "main:main"
+'@ | Set-Content -Path pyproject.toml -Force

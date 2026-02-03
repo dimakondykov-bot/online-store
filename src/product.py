@@ -8,10 +8,22 @@ class Product:
     def __str__(self):
         return f'{self.name}, {self.price} руб., Остаток: {self.quantity} шт'
 
+    def __repr__(self):
+        return f"Product('{self.name}', {self.price}, {self.quantity})"
+
     def __add__(self, other):
-        if not isinstance(other, Product):
+        if isinstance(other, Product):
+            return (self.price * self.quantity) + (other.price * other.quantity)
+
+        elif isinstance(other, (int, float)):
+            return (self.price * self.quantity) + other
+
+        else:
             raise TypeError
-        return (self.__price * self.quantity) + (other.__price * other.quantity)
+
+    def total_cost(self):
+        """Возвращает общую стоимость товара (цена * количество)"""
+        return self.price * self.quantity
 
     @classmethod
     def new_product(cls, product_dict: dict, existing_products=None):
@@ -70,6 +82,3 @@ class Product:
                 return
 
         self.__price = new_price
-
-    def __str__(self):
-        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."

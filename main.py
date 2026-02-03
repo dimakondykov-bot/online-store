@@ -1,4 +1,6 @@
-from category import Category
+from src.category import Category
+from src.product import Product
+
 
 def main():
     product1 = Product('Product 1', 'Test product', 100.0, 1)
@@ -13,6 +15,6 @@ def main():
     for item in category:
         print(item)
 
+
 if __name__ == '__main__':
     main()
-

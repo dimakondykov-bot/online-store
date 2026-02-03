@@ -21,6 +21,6 @@ class Smartphone(Product):
 
     def __add__(self, other):
         """Функция складывает товары одного класса"""
-        if type(self) != type(other):
+        if isinstance(other, Smartphone):
             raise TypeError
         return (self.price * self.quantity) + (other.price * other.quantity)

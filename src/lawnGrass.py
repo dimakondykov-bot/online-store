@@ -1,7 +1,6 @@
 from src.product import Product
 
 
-
 class LawnGrass(Product):
     def __init__(self,
                  name,
@@ -19,6 +18,6 @@ class LawnGrass(Product):
 
     def __add__(self, other: Product):
         """Функция складывает товары одного класса"""
-        if type(self) != type(other):
+        if isinstance(other, LawnGrass):
             raise TypeError
         return (self.price * self.quantity) + (other.price * other.quantity)
