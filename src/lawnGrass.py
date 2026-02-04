@@ -15,9 +15,3 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
-
-    def __add__(self, other: Product):
-        """Функция складывает товары одного класса"""
-        if isinstance(other, LawnGrass):
-            raise TypeError
-        return (self.price * self.quantity) + (other.price * other.quantity)
