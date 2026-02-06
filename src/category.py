@@ -3,7 +3,7 @@ from src.product import Product
 
 class Category:
     total_categories = 0
-    total_product = 0
+    product_count = 0
 
     def __init__(self, name: str, description: str, products=None):
         self.name = name
@@ -11,7 +11,7 @@ class Category:
         self.__products = products if products else []
 
         Category.total_categories += 1
-        Category.total_product += len(self.__products)
+        Category.product_count += len(self.__products)
 
     def __str__(self):
         return f'Название категории: {self.name}, количество продуктов: {self.products_count} шт.'
@@ -35,7 +35,7 @@ class Category:
                 return
 
         self.__products.append(product)
-        Category.total_product += 1
+        Category.product_count += 1
         print(f"Товар '{product.name}' успешно добавлен")
 
     def __iter__(self):
