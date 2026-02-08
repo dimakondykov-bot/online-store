@@ -34,5 +34,5 @@ def sample_category():
 @pytest.fixture(autouse=True)
 def reset_counters():
     Category.total_categories = 0
-    Category.total_products = 0
+    Category.product_count = 0
     yield

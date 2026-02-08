@@ -5,6 +5,22 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        return f'{self.name}, {self.price} руб., Остаток: {self.quantity} шт'
+
+    def __repr__(self):
+        return f"Product('{self.name}', {self.price}, {self.quantity})"
+
+    def __add__(self, other):
+        if type(self) is type(other):
+            return (self.price * self.quantity) + (other.price * other.quantity)
+        else:
+            raise TypeError
+
+    def total_cost(self):
+        """Возвращает общую стоимость товара (цена * количество)"""
+        return self.price * self.quantity
+
     @classmethod
     def new_product(cls, product_dict: dict, existing_products=None):
         """
@@ -62,6 +78,3 @@ class Product:
                 return
 
         self.__price = new_price
-
-    def __str__(self):
-        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
