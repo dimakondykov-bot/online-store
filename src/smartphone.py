@@ -1,7 +1,8 @@
+from src.base_product import BaseProduct
 from src.product import Product
 
 
-class Smartphone(Product):
+class Smartphone(Product, BaseProduct):
     def __init__(
             self,
             name,

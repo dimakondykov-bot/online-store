@@ -1,7 +1,8 @@
 from src.product import Product
+from src.base_product import BaseProduct
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, BaseProduct):
     def __init__(self,
                  name,
                  description,
@@ -15,3 +16,4 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
+

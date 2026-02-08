@@ -6,7 +6,7 @@ def test_category_creation(sample_category: Category):
 
     assert sample_category.name == "Electronics"
     assert len(sample_category.get_products_list()) == 5
-    assert Category.total_categories == 2
+    assert Category.category_count == 2
     assert Category.product_count == 5
 
 def test_category_with_empty_products():

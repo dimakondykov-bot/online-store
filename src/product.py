@@ -1,9 +1,16 @@
-class Product:
+from src.base_product import BaseProduct
+from src.print_mixin import PrintMixin
+
+
+
+class Product(BaseProduct, PrintMixin):
+
     def __init__(self, name, description, price=0.0, quantity=0):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self):
         return f'{self.name}, {self.price} руб., Остаток: {self.quantity} шт'
