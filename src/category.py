@@ -1,3 +1,5 @@
+from logging import exception
+
 from src.product import Product
 
 
@@ -8,13 +10,41 @@ class Category:
     def __init__(self, name: str, description: str, products=None):
         self.name = name
         self.description = description
-        self.__products = products if products else []
+        self.__products = []
+        if products:
+            for product in products:
+                if product.quantity > 0:
+                    self.add_product(product)
+                else:
+                    raise ValueError
+
 
         Category.category_count += 1
-        Category.product_count += len(self.__products)
+
 
     def __str__(self):
         return f'Название категории: {self.name}, количество продуктов: {self.products_count} шт.'
+
+    def middle_price(self):
+        """  функция вычисляет среднюю цену товаров в категории."""
+        valid_price = []
+        for product in self.__products:
+            try:
+                price = product.price
+                price = float(price)
+                if price < 0:
+                    raise ValueError("Цена не может быть отрицательной")
+                valid_price.append(price)
+            except AttributeError:
+                print(f'У товара {product} нет атрибута price')
+            except ValueError:
+                print(f'Не правильная цена у товара{product}')
+            except Exception as e:
+                print(f"Другая ошибка при обработке товара {product}")
+        if not valid_price:
+            return 0
+        return sum(valid_price) / len(valid_price)
+
 
     def add_product(self, product: Product) -> None:
         """Добавляет товар в категорию с проверкой дубликатов"""

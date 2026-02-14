@@ -6,6 +6,8 @@ from src.print_mixin import PrintMixin
 class Product(BaseProduct, PrintMixin):
 
     def __init__(self, name, description, price=0.0, quantity=0):
+        if quantity < 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.name = name
         self.description = description
         self.__price = price
@@ -19,6 +21,7 @@ class Product(BaseProduct, PrintMixin):
         return f"Product('{self.name}', {self.price}, {self.quantity})"
 
     def __add__(self, other):
+        """Функция проверяет типы объектов. Возвращает сумму значений. Если типы разные выбрасывает ошибку TypeError"""
         if type(self) is type(other):
             return (self.price * self.quantity) + (other.price * other.quantity)
         else:
@@ -38,6 +41,7 @@ class Product(BaseProduct, PrintMixin):
             existing_products: список существующих товаров для проверки дубликатов
         """
         name = product_dict.get('name')
+
         if not name:
             raise ValueError('Поле "name" не может быть пустым или отсутствовать')
 
